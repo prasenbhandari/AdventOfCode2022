@@ -8,6 +8,23 @@ def find_value(common_letter):
     return value
 
 
+def grouping(data):
+
+    main = []
+    sub = []
+    count = 0
+
+    for i in data:
+        sub.append(i)
+        count += 1
+
+        if count % 3 == 0:
+            main.append(sub[:])
+            sub.clear()
+
+    return main
+
+
 with open("day3.txt") as file_object:
     sum = 0
 
@@ -15,10 +32,10 @@ with open("day3.txt") as file_object:
     splt = data.split("\n")
     splt.remove('')
 
-    split1 = ''
+    #part 1
+    """split1 = ''
     split2 = ''
 
-    #part 1
     for x in splt:
         split1 = x[:len(x) // 2]
         split2 = x[len(x) // 2:]
@@ -28,8 +45,16 @@ with open("day3.txt") as file_object:
                 sum += find_value(i)
                 break
 
-    print(sum)
+    print(sum)"""
 
     #part 2
-    for x in splt:
-        group = x
+
+    group_of_3 = grouping(splt)
+
+    for x in group_of_3:
+        for i in x[0]:
+            if i in x[1] and i in x[2]:
+                sum += find_value(i)
+                break
+
+    print(sum)
